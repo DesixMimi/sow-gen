@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>SOW - {{ project_name }}</title>
+    <style>
+        @page {
+            margin: 0;
+            size: A4;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            background-color: #fff;
+            direction: rtl;
+        }
+
+        /* Color Palette */
+        :root {
+            --teal: #7AC7C4;
+            --salmon: #F4A28C;
+            --dark-text: #2c3e50;
+            --light-bg: #f8f9fa;
+        }
+
+        /* Cover Page Styling */
+        .cover-page {
+            padding: 2cm 2cm 0 2cm;
+            position: relative;
+            height: 95vh; /* Occupy most of the first page */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .top-accent {
+            position: absolute;
+            top: 0;
+            right: 2cm;
+            width: 1.5cm;
+            height: 4cm;
+            background-color: var(--teal);
+            z-index: -1;
+        }
+        
+        .top-accent-2 {
+            position: absolute;
+            top: 4cm;
+            right: 2cm;
+            width: 1.5cm;
+            height: 1cm;
+            background-color: var(--salmon);
+            z-index: -1;
+        }
+
+        header {
+            text-align: left; /* Logo on left in RTL usually means far side, but request implies specific layout. Let's keep strict RTL alignment mostly */
+            margin-bottom: 3cm;
+            padding-top: 2cm;
+        }
+
+        .brand {
+            font-size: 32pt;
+            font-weight: bold;
+            color: var(--teal);
+            text-align: left;
+        }
+        
+        .brand span {
+            color: #555;
+            font-weight: normal;
+        }
+
+        .cover-details {
+            text-align: left;
+            margin-bottom: 2cm;
+            font-size: 11pt;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        .cover-title {
+            text-align: right;
+            margin-top: 2cm;
+        }
+        
+        .cover-title h1 {
+            font-size: 24pt;
+            color: var(--salmon);
+            margin: 0 0 10px 0;
+        }
+        
+        .cover-title p {
+            font-size: 14pt;
+            color: #fff; /* In dark mode it was white, here dark text? */
+            color: #333;
+        }
+
+        .signatures {
+            margin-top: 3cm;
+            text-align: left;
+        }
+
+        /* Mosaic Footer */
+        .mosaic-container {
+            width: 100%;
+            margin-top: auto;
+            margin-bottom: 0;
+            line-height: 0;
+        }
+
+        table.mosaic {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: fixed;
+            height: 80px; 
+        }
+        
+        table.mosaic td {
+            height: 15px;
+            width: 4%; /* 25 columns */
+            border: 1px solid #fff;
+            padding: 0;
+        }
+
+        .bg-t { background-color: var(--teal); }
+        .bg-s { background-color: var(--salmon); }
+        .bg-w { background-color: #eee; } /* Light grey instead of white for contrast */
+        .bg-x { background-color: transparent; }
+
+        /* Content Pages */
+        .content-section {
+            padding: 2cm;
+            page-break-before: always;
+        }
+
+        h2 {
+            color: var(--teal);
+            border-bottom: 2px solid var(--salmon);
+            display: inline-block;
+            padding-bottom: 5px;
+            margin-top: 30px;
+        }
+
+        table.data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            font-size: 10pt;
+        }
+
+        table.data-table th {
+            background-color: var(--teal);
+            color: white;
+            padding: 10px;
+            text-align: right;
+        }
+
+        table.data-table td {
+            border-bottom: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        table.data-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Decorative Top Right Strip -->
+    <div class="top-accent"></div>
+    <div class="top-accent-2"></div>
+
+    <div class="cover-page">
+        <header>
+            <div class="brand">Clouding <span lang="he">חברת</span></div>
+        </header>
+
+        <div class="cover-details">
+            <div>{{ date }}</div>
+            <br>
+            <div><strong>{{ customer_name }}</strong></div>
+            <div>{{ customer_role }}</div>
+            <div>{{ customer_company }}</div>
+        </div>
+
+        <div class="cover-title">
+            <h1>שלום</h1>
+            <p>מצורפת בזאת הצעת מחיר לפרויקט <strong>{{ project_name }}</strong>.</p>
+        </div>
+
+        <div class="signatures">
+            <p>בברכה,</p>
+            <br>
+            <p><strong>חנן ענן</strong></p>
+            <p>מנהל מכירות ענן</p>
+        </div>
+
+        <!-- Mosaic Footer (Replica) -->
+        <div class="mosaic-container">
+            <table class="mosaic">
+                <!-- Row 1 -->
+                <tr>
+                    <td class="bg-x"></td> <td class="bg-x"></td> <td class="bg-t"></td> <td class="bg-s"></td> <td class="bg-t"></td> <td class="bg-w"></td> <td class="bg-t"></td> <td class="bg-x"></td> <td class="bg-s"></td> <td class="bg-t"></td> <td class="bg-w"></td> <td class="bg-t"></td> <td class="bg-s"></td> <td class="bg-x"></td> <td class="bg-t"></td> <td class="bg-w"></td> <td class="bg-t"></td> <td class="bg-s"></td> <td class="bg-x"></td> <td class="bg-t"></td> <td class="bg-w"></td> <td class="bg-s"></td> <td class="bg-t"></td> <td class="bg-x"></td> <td class="bg-t"></td>
+                </tr>
+                <!-- Row 2 -->
+                <tr>
+                    <td class="bg-t"></td> <td class="bg-w"></td> <td class="bg-s"></td> <td class="bg-x"></td> <td class="bg-t"></td> <td class="bg-s"></td> <td class="bg-w"></td> <td class="bg-t"></td> <td class="bg-x"></td> <td class="bg-t"></td> <td class="bg-s"></td> <td class="bg-w"></td> <td class="bg-t"></td> <td class="bg-x"></td> <td class="bg-s"></td> <td class="bg-t"></td> <td class="bg-w"></td> <td class="bg-x"></td> <td class="bg-t"></td> <td class="bg-s"></td> <td class="bg-t"></td> <td class="bg-w"></td> <td class="bg-x"></td> <td class="bg-s"></td> <td class="bg-t"></td>
+                </tr>
+                <!-- Row 3 -->
+                <tr>
+                    <td class="bg-w"></td> <td class="bg-t"></td> <td class="bg-x"></td> <td class="bg-s"></td> <td class="bg-t"></td> <td class="bg-w"></td> <td class="bg-x"></td> <td class="bg-t"></td> <td class="bg-s"></td> <td class="bg-w"></td> <td class="bg-t"></td> <td class="bg-x"></td> <td class="bg-s"></td> <td class="bg-t"></td> <td class="bg-w"></td> <td class="bg-x"></td> <td class="bg-t"></td> <td class="bg-s"></td> <td class="bg-t"></td> <td class="bg-w"></td> <td class="bg-x"></td> <td class="bg-t"></td> <td class="bg-s"></td> <td class="bg-w"></td> <td class="bg-t"></td>
+                </tr>
+                 <!-- Row 4 -->
+                 <tr>
+                    <td class="bg-s"></td> <td class="bg-x"></td> <td class="bg-t"></td> <td class="bg-w"></td> <td class="bg-s"></td> <td class="bg-t"></td> <td class="bg-x"></td> <td class="bg-w"></td> <td class="bg-t"></td> <td class="bg-s"></td> <td class="bg-x"></td> <td class="bg-t"></td> <td class="bg-w"></td> <td class="bg-s"></td> <td class="bg-t"></td> <td class="bg-x"></td> <td class="bg-w"></td> <td class="bg-t"></td> <td class="bg-s"></td> <td class="bg-x"></td> <td class="bg-t"></td> <td class="bg-w"></td> <td class="bg-s"></td> <td class="bg-t"></td> <td class="bg-x"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+
+    <!-- Content Pages -->
+    <div class="content-section">
+        
+        <h2>מי אנחנו?</h2>
+        <p>{{ project_description }}</p>
+
+        <h2>תכולת עבודה</h2>
+        
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>שלב</th>
+                    <th>משימות</th>
+                    <th>תפקיד</th>
+                    <th>שעות</th>
+                    <th>תעריף</th>
+                    <th>סה"כ</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for phase in phases %}
+                <tr>
+                    <td><strong>{{ phase.name }}</strong></td>
+                    <td>{{ phase.description }}</td>
+                    <td>{{ phase.role }}</td>
+                    <td>{{ phase.hours }}</td>
+                    <td>{{ phase.rate }}</td>
+                    <td>{{ phase.total }}</td>
+                </tr>
+                {% endfor %}
+                <tr style="font-weight: bold; background-color: #eee;">
+                    <td>סה"כ</td>
+                    <td colspan="4"></td>
+                    <td>{{ total_cost }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        {% if maintenance_items %}
+        <h2>תחזוקה שוטפת</h2>
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>פריט</th>
+                    <th>עלות חודשית</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in maintenance_items %}
+                <tr>
+                    <td>{{ item.description }}</td>
+                    <td>{{ item.cost }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+
+        <br><br>
+        <div style="direction: ltr; text-align: left; font-size: 9pt; color: #777; border-top: 1px solid #ccc; padding-top: 10px;">
+            <p><strong>Terms:</strong> Standard net 30 payment terms apply. This document is confidential.</p>
+        </div>
+    </div>
+
+</body>
+</html>
